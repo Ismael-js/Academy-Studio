@@ -1,0 +1,367 @@
+# ==============================================
+# Ajustes generales del bot Academy Studios
+# ==============================================
+
+panelMethod: "Buttons" # El método del panel, puede ser Botones (Buttons) o Menu
+menuPlaceholder: "Select a category to open a ticket." # El placeholder del Menú
+default_embed_color: "#2FF200" # El color default del embed
+logs_channel_id: "1252075989429911623" # la ID del canal de logs
+transcripts_channel_id: "1252075989429911623" # la ID del canal de transcripciones
+transcriptType: "HTML" # El tipo de transcripción, puede ser "HTML" o "TXT", tenga en cuenta que la opción TXT está limitada a 400 mensajes
+support_role_ids: ["1249849774249738371"] # Los IDs de los roles del staff, ejemplo de agregar rol ["000000000000000000", "111111111111111111"]
+reOpenStaffOnly: true # Cuando está true (Activado), sólo los staff pueden reabrir un ticket, en caso de false (Desactivado) los usuarios también pueden.
+closeStaffOnly: true # Cuando está en true (Activado), solo los staff pueden cerrar ticket, en caso de false (Desactivado) los usuarios podran cerrarlo.
+commands_cooldown: "5" # Los segundos de cooldown en los comandos
+buttons_cooldown: "5" # El cooldown de respuesta de los botones
+maxOpenTickets: "1" # El número máximo de tickets abiertos que un usuario puede tener a la vez.
+deleteTicketTime: "5" # El tiempo que tiene un ticket antes de ser eliminado.
+claimFeature: false # Activar (true) o desactivar (false) el botón/función de reclamación (reclaim)
+pingRoles: false # Activar (true) o desactivar (false) los roles de ping cuando se abre un ticket
+ping_role_ids: [] # Los IDs de los roles de cuando abra un ticket se les hara ping, ejemplo de agregar rol ["000000000000000000", "111111111111111111"]
+status:
+  botActivityText: "Support Tickets" # El mensaje de actividad del bot
+  botActivityType: "Watching" # El tipo de actividad del bot, puede ser "Playing", "Streaming", "Listening", "Watching", "Competing"
+  streamingOptionURL: "" # Aquí la URL en caso de que se utilice la opción de streaming
+  botStatus: "online" # El estado del bot, puede ser "online", "idle", "dnd", "invisible", nota: la actividad 'Streaming' requiere el estado "online". 
+
+# ==============================================
+#  Ajustes de categoría de los tickets
+# ==============================================
+
+# El límite establecido por discord es de 25, aunque es muy recomendable no usar una cantidad tan alta de tipos teniendo en cuenta que cada tipo usa 2 categorías y el límite de discord es de 50 categorías, ya no te quedarían categorías para usar en tus canales normales de discord...
+TicketCategories:
+  - id: 1 # ID único para cada categoría, SÓLO USAR NÚMEROS (Se sugiere incrementar este valor de a 1 cada vez)
+    name: "service" # El nombre de la categoría, escribirlo en minusculas.
+    categoryID: "1254863567132557352" # ID de la categoría en la que se crearán los tickets
+    closedCategoryID: "1254863567132557352" # ID de la categoría donde se cerraran los tickets
+    buttonEmoji: "<:bt_star:1255909340494299226>" # El emoji del boton
+    buttonLabel: "Service/Commission" # El nombre del boton
+    buttonStyle: "Success" # Estilo del boton, opciones: "Primary" (Azul), "Secondary" (Gris), "Success" (Verde), "Danger" (Rojo), Nota: no usar "Link".
+    menuEmoji: "<:bt_star:1255909340494299226>" # El emoji del Menú de selección
+    menuLabel: "Service/Commission" # El nombre en el Menú de selección
+    menuDescription: "Click on this option to open a construction service ticket." # La descripción en el Menú de selección
+    embedTitle: "Ticket Service/Commission" # El titulo del embed
+    color: "#FFD700" # El color del embed en el ticket abierto
+    description: "Welcome to your building service ticket! Please be patient while a staff member responds to your request." # Descripción del ticket abierto, se vera arriba de los campos de preguntas
+    ticketName: "USERNAME" # Opciones: USERNAME o TICKETCOUNT, ejemplos: nombreCategoria-Ismadev o nombreCategoria-12345678
+    modalTitle: "COMMISSION FORM" # Titulo del formulario (Modal)
+    questions: # El número máximo de preguntas es 5, recomendación: 3, estas preguntas siempre nos ayudaran en un ticket previamente.
+      - label: "What construction would you like?"
+        placeholder: "Explain the construction"
+        style: "Paragraph" # El texto del usuario puede ser: Short (Corto) o Paragraph (Parrafo)
+        required: true # Si la respuesta es necesaria o no, puede ser true o false
+        minLength: 50 # Aquí establece el número mínimo de caracteres necesarios del texto.
+      - label: "What dimensions do you require?"
+        placeholder: "Tell us the dimensions you have in mind!"
+        style: "Short"
+        required: true
+        minLength: 3
+      - label: "What thematic do you have in mind?"
+        placeholder: "Mention the topic"
+        style: "Short" 
+        required: true
+        minLength: 3
+      - label: "Minecraft version of the construction?"
+        placeholder: "Write the version"
+        style: "Short"
+        required: true
+        minLength: 3
+      - label: "What is the lead time you have in mind?"
+        placeholder: "Write the delivery time"
+        style: "Short"
+        required: true
+        minLength: 3
+  - id: 2
+    name: "support"
+    categoryID: "1254863567132557352"
+    closedCategoryID: "1254863567132557352"
+    buttonEmoji: "<:bt_azzaright:1251023145201041480>"
+    buttonLabel: "Support"
+    buttonStyle: "Primary"
+    menuEmoji: "<:bt_azzaright:1251023145201041480>"
+    menuLabel: "Support"
+    menuDescription: "Click on this option to open a miscellaneous ticket!"
+    embedTitle: "Support Ticket"
+    color: "#ADD8E6"
+    description: "Welcome to your member ticket! Please be patient while a staff member responds to your questions."
+    ticketName: "USERNAME"
+    modalTitle: "Other Ticket Format"
+    questions:
+      - label: "What can we help you with?"
+        placeholder: "Write your answer"
+        style: "Paragraph"
+        required: true
+        minLength: 10
+  - id: 3
+    name: "apply"
+    categoryID: "1254863567132557352"
+    closedCategoryID: "1254863567132557352"
+    buttonEmoji: "<:bt_staff:1255907796671533079>"
+    buttonLabel: "Apply to Academy Studios"
+    buttonStyle: "Secondary"
+    menuEmoji: "<:bt_staff:1255907796671533079>"
+    menuLabel: "Apply to Academy Studios"
+    menuDescription: "Click on this option to open a miscellaneous ticket!"
+    embedTitle: "Other Ticket"
+    color: "#ADD8E6"
+    description: "Welcome to your Apply ticket! Please be patient while a staff member responds to your questions."
+    ticketName: "USERNAME"
+    modalTitle: "Other Ticket Format"
+    questions:
+      - label: "What can we help you with?"
+        placeholder: "Write your answer"
+        style: "Paragraph"
+        required: true
+        minLength: 10
+
+
+# ==============================================
+# Ajustes del DM
+# ==============================================
+DMUserSettings:
+  enabled: true # Activar o desactivar el envío de MD/DM a un usuario una vez eliminado su ticket. Contendría solo el embed (Transcript sacada por seguridad)
+  embed:
+    color: "2FF200"
+    title: "Ticket Deleted » Ticket Eliminado."
+    description: ":flag_us: | Your Academy Studios ticket was deleted. Here is some information.\n\n :flag_es: | Tu ticket de Academy Studios ha sido borrado. Aquí tienes algo de información.\n" # Esta descripción aparecerá encima del resto de la información en el embed del MD.
+
+# ==============================================
+# Ajustes de Slash Commands
+# ==============================================
+
+# Puede desactivar un comando estableciendo enabled: false para cualquiera, aunque recomiendo mantenerlos todos activados
+# Para saber sobre las opciones que tiene como permisos cada comando, recomiendo ver este link:  https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags
+commands:
+  add:
+    enabled: true
+    permission: "KickMembers"
+    embed:
+      color: "2FF200"
+      description: "Added **{target} ({target.tag})** to the ticket." # Utiliza {target} para el usuario o rol, ejemplo: @User, @Role, y {target.tag} para el nombre del usuario o rol sin necesidad de mencionar, ejemplo: User, Rol.
+    LogEmbed:
+      color: "2FF200"
+      title: "Ticket Logs | User/Role Added"
+      field_staff: "<:bt_azzaright:1251023145201041480> Staff"
+      field_target: "<:bt_azzaright:1251023145201041480> User/Role"
+      field_ticket: "<:bt_azzaright:1251023145201041480> Ticket"
+  alert:
+    enabled: true
+    permission: "KickMembers"
+    embed:
+      color: "2FF200"
+      title: "Ticket Close Notification"
+      description: ":flag_us: | This ticket will be closed soon if no response has been received.\n\n:flag_es: | Este ticket se cerrará en breve si no se recibe respuesta."
+  transcript:
+    enabled: true
+    permission: "KickMembers"
+  claim:
+    enabled: true
+    permission: "KickMembers"
+  unclaim:
+    enabled: true
+    permission: "KickMembers"
+  move:
+    enabled: true
+    permission: "KickMembers"
+    embed:
+      color: "2FF200"
+      description: "Moved this ticket to the **{category}** category." # Usa {category} para el nombre de la categoría
+    LogEmbed:
+      color: "2FF200"
+      title: "Ticket Logs | Ticket Moved"
+      field_staff: "<:bt_azzaright:1251023145201041480> Staff"
+      field_ticket: "<:bt_azzaright:1251023145201041480> Ticket"
+  transfer:
+    enabled: true
+    permission: "KickMembers"
+    embed:
+      color: "2FF200"
+      description: "The ownership of this ticket has been transferred to **{user} ({user.tag})**." # Usa {user} para el usuario como @User y {user.tag} para el nombre del usuario sin que se mencione.
+    LogEmbed:
+      color: "2FF200"
+      title: "Ticket Logs | Ticket Creator Transferred"
+      field_staff: "<:bt_azzaright:1251023145201041480> Staff"
+      field_ticket: "<:bt_azzaright:1251023145201041480> Ticket"
+      field_transfer: "<:bt_azzaright:1251023145201041480> Transfer Details"
+  pin:
+    enabled: false
+    permission: "KickMembers"
+    emoji: "📌"
+    alreadyPinned: "This ticket is already pinned!"
+    embed:
+      color: "2FF200"
+      description: "This ticket has been pinned."
+  slowmode:
+    enabled: true
+    permission: "KickMembers"
+    alreadySlowmode: "This ticket channel already has that slowmode."
+    slowmodeRemoved: "The slowmode has been removed from this ticket."
+    embed:
+      color: "2FF200"
+      description: "A slowmode of **{time}** has been added to this ticket." # Utiliza {time} para la hora en formato hh mm ss, ejemplo: 1h 5m 7s
+  close:
+    enabled: false
+    permission: "KickMembers"
+    embed:
+      color: "#FF2400"
+      title: "Ticket Closed"
+      description: "This ticket was closed by **{user} ({user.tag})**" # Establece {user} para el nombre del staff y {user.tag} para que se mencione al staff
+    LogEmbed:
+      color: "#FF2400"
+      title: "Ticket Logs | Ticket Closed"
+      field_staff: "<:bt_azzaright:1251023145201041480> Closed By"
+      field_user: "<:bt_azzaright:1251023145201041480> Ticket Creator"
+      field_ticket: "<:bt_azzaright:1251023145201041480> Ticket"
+  delete:
+    enabled: false
+    permission: "KickMembers"
+    embed:
+      color: "#FF0000"
+      description: "Deleting ticket in {time} seconds" # Usa {time} para el tiempo en segundos
+    LogEmbed:
+      color: "#FF0000"
+      title: "Ticket Logs | Ticket Force Deleted"
+      field_staff: "<:bt_azzaright:1251023145201041480> Deleted By"
+      field_user: "<:bt_azzaright:1251023145201041480> Ticket Creator"
+      field_ticket: "<:bt_azzaright:1251023145201041480> Ticket"
+  panel:
+    enabled: true
+    permission: "ManageChannels"
+    embed:
+      color: "B655FF" # Color del embed (Panel)
+      title: "Support @AcademyStudios" # Titulo del embed
+      description: "### :flag_us: **English**\n\n<:whitesmall:849113182177984572> Get the help you need to answer your questions.\n<:whitesmall:849113182177984572> Find assistance for resolving any issues or concerns with our services.\n<:whitesmall:849113182177984572> Access support if you experience any problems with our products.\n\n### :flag_es: **Español**\n\n<:whitesmall:849113182177984572> Encuentra la asistencia que necesitas para resolver tus dudas.\n<:whitesmall:849113182177984572> Obtén ayuda para abordar cualquier inquietud o problema relacionado con nuestros servicios. \n<:whitesmall:849113182177984572> Recibe soporte para cualquier problema que enfrentes con nuestros productos." # Use \n to create a new line for this embed description if needed
+      footer_msg: "Ticket System" # Mensaje del final (QUITADO, Avisadme para añadirlo: @ismaeldev_)
+  remove:
+    enabled: true
+    permission: "KickMembers"
+    embed:
+      color: "#FF0000"
+      description: "Removed **{target} ({target.tag})** from the ticket."
+    LogEmbed:
+      color: "#FF0000"
+      title: "Ticket Logs | User/Role Removed"
+      field_staff: "<:bt_azzaright:1251023145201041480> Staff"
+      field_target: "<:bt_azzaright:1251023145201041480> User/Role"
+      field_ticket: "<:bt_azzaright:1251023145201041480> Ticket"
+  rename:
+    enabled: true
+    permission: "KickMembers"
+    embed:
+      color: "#2FF200"
+      description: "This ticket has been renamed to **{name}**!" # Usen {nombre} para el nombre del nuevo canal
+    LogEmbed:
+      color: "#2FF200"
+      title: "Ticket Logs | Ticket Renamed"
+      field_staff: "<:bt_azzaright:1251023145201041480> Staff"
+      field_oldname: "<:bt_azzaright:1251023145201041480> Ticket Old Name"
+      field_newname: "<:bt_azzaright:1251023145201041480> Ticket New Name"
+  blacklist:
+    enabled: true
+    permission: "KickMembers"
+    embedFailed:
+      color: "#2FF200"
+      description: "**{target} ({target.tag})** is already in the blacklist." # Usen {target} para mencionar o {target.tag} para no mencionar.
+    embedSuccess:
+      color: "#2FF200"
+      description: "**{target} ({target.tag})** has been added to the blacklist." # Usen {target} para mencionar o {target.tag} para no mencionar.
+  unblacklist:
+    enabled: true
+    permission: "KickMembers"
+    embedFailed:
+      color: "#2FF200"
+      description: "**{target} ({target.tag})** is not currently in the blacklist." # Usen {target} para mencionar o {target.tag} para no mencionar.
+    embedSuccess:
+      color: "#2FF200"
+      description: "**{target} ({target.tag})** has been removed from the blacklist." # Usen {target} para mencionar o {target.tag} para no mencionar.
+  ping:
+    enabled: false
+    permission: "KickMembers"
+  stats:
+    enabled: false
+    permission: "KickMembers"
+  show:
+    enabled: true
+    permission: "KickMembers"
+
+# ==============================================
+# Ajustes generales de los botones
+# ==============================================
+
+closeButton:
+  label: "Close" # Mensaje del boton
+  emoji: "🔒" # Emoji del boton
+  style: "Danger" # Estilo del boton, opciones: "Primary" (Azul), "Secondary" (Gris), "Success" (Verde), "Danger" (Rojo), Nota: no usar "Link".
+
+reOpenButton:
+  label: "Reopen" 
+  emoji: "🔓"
+  style: "Success" 
+
+transcriptButton:
+  label: "Transcript"
+  emoji: "📝" 
+  style: "Primary" 
+  
+deleteButton:
+  label: "Delete" 
+  emoji: "⛔" 
+  style: "Danger" 
+
+claimButton:
+  label: "Claim" 
+  emoji: "👋" 
+  style: "Success" 
+
+unclaimButton:
+  label: "Unclaim" 
+  emoji: "👋" 
+  style: "Danger"
+
+# ==============================================
+# Ajustes de salida
+# ==============================================
+
+# En esta sección se ajusta el embed que se envía en un ticket si el creador del ticket salio el servidor
+userLeftEmbed:
+  embed_color: "#FF0000" # Color el embed
+  embed_title: "User left the server" # Titulo del embed
+  embed_description: "The user {user} left the server" # Utilicen {user} como variable para el nombre de usuario que se fue y \n para añadir abajo una nueva línea
+
+# ==============================================
+# Ajustes de hora de trabajo
+# ==============================================
+
+# Nota: si el sistema de horas de trabajo no funciona, lo más probable es que se deba a una configuración incorrecta de las horas mínimas y máximas.
+workingHours:
+  enabled: false # Activar (true) o desactivar (false) el horario de trabajo
+  timezone: "America/Buenos_Aires" # La zona horaria de las horas de trabajo, pueden cambiar la zona utilizando las de este link: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones (Deberia funcionar xD)
+  min: "09:00" # La hora mínima, asegurate de usar el formato de 24 horas HH:MM, ejemplos: 00:59, 05:00, 17:00, 23:59 no olvide incluir el primer 0.
+  max: "17:00" # La hora mínima, asegurate de usar el formato de 24 horas HH:MM, ejemplos: 00:59, 05:00, 17:00, 23:59 no olvide incluir el primer 0.
+  blockTicketCreation: true # Activar (true) o desactivar (false) el bloqueo de creación de tickets fuera del horario
+  blockTicketEmbed:
+    embed_color: "#FF0000" # Color del embed
+    embed_title: "Working Hours" # Titulo del embed
+    embed_description: "Tickets are only open between {openingTime} and {closingTime}.\nThe current time now is {now}." # Mensaje que se muestra cuando se bloquea la creación del ticket, usa {openingTime} para la hora de apertura, {closingTime} para la hora de cierre y {now} para la hora actual.
+  addField: true # Si las horas de trabajo están activadas, esta opción habilitara o deshabilitara los campos de texto de las horas de trabajo en la creación del ticket.
+  fieldTitle: "Working Hours" # Titulo de las horas trabajas en los campos de texto.
+  fieldValue: "> {openingTime} to {closingTime}" # El valor del campo de texto de las horas de trabajo, Usen {openingTime} para la hora de apertura y {closingTime} para la hora de cierre.
+
+# ==============================================
+# Ajustes extras
+# ==============================================
+
+errors:
+  not_in_a_ticket: "You are not in a ticket channel!" # Aparecera un error cuando un usuario intenta utilizar un comando en un canal que no es de tickets
+  not_allowed: "You are not allowed to use this command!" # Mostrara un error cuando un usuario intenta utilizar un comando solo del staff
+  blacklisted: "You are blacklisted from creating tickets at this time." # Se enviara un error cuando un usuario intenta crear un ticket pero está en la BlackList
+
+cooldownEmbed:
+  title: "Cooldown"
+  color: "#FF0000"
+  description: "You have to wait **{time}** seconds before clicking this button!" # Usen la variable {time} para mostrar el tiempo que le queda de espera. 
+
+maxOpenTicketsEmbed:
+  title: "Maximum Tickets Open"
+  color: "#FF0000"
+  description: "You may only have **{max} ticket(s)** open at a time." # Usen la variable {max} para el número máximo de tickets que se pueden abrir.
